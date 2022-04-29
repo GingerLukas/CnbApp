@@ -1,0 +1,14 @@
+version: '3.4'
+services:
+  db:
+    image: postgres
+    container_name: database-cnb
+    environment:
+      - POSTGRES_USER=app
+      - POSTGRES_PASSWORD=Heslo1234.
+      - POSTGRES_DB=cnb_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./data-cnb:/var/lib/postgresql/data
+    restart: unless-stopped
