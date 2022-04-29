@@ -5,10 +5,12 @@ using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddDbContext<ApplicationDbContext>(optionsBuilder =>
+    optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=cnb_db;Password=Heslo1234.;Username=app;"));
+
 builder.Services.AddControllersWithViews();
 string connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-builder.Services.AddDbContext<ApplicationDbContext>(optionsBuilder =>
-    optionsBuilder.UseNpgsql("Server=localhost;Port=5432;Database=cnb_db;Password=Heslo1234.;User Id=app;"));
+
 
 
 builder.Services.AddScoped<CurrencyApiService>();

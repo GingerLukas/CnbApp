@@ -31,6 +31,8 @@ public class CurrencyApiService
 
     public IEnumerable<Currency> GetAll()
     {
+        var data = _dbContext.Currencies.First();
+        
         return _dbContext.Currencies.ToList();
     }
 
@@ -59,8 +61,8 @@ public class CurrencyApiService
 
     public async void UpdateCurrencies()
     {
-        string[] data = (await _httpClient.GetStringAsync(CNB_API_ENDPOINT)).Split('\n');
-        DateTimeOffset time = DateTimeOffset.Now;
+        string[] data = ( _httpClient.GetStringAsync(CNB_API_ENDPOINT).GetAwaiter().GetResult()).Split('\n');
+        DateTimeOffset time = DateTime.Now;
         string header0 = data[0];
         string header1 = data[1];
         foreach (string s in data[HEADER_LEN..])
